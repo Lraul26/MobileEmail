@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:tns="http://tempuri.org/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="Register">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="AccountName" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="ProfilePhoto" nillable="true" type="s:unsignedByte" />
+            <s:element minOccurs="0" maxOccurs="1" name="AlternativeMail" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Pass" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RegisterResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RegisterResult" type="tns:ResultRegister" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ResultRegister">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Band" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="Mensaje" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="Login">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AccountName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Pass" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LoginResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="LoginResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InBox">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AccountName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Pass" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InBoxResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="InBoxResult" type="tns:ArrayOfMailSW" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfMailSW">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="MailSW" nillable="true" type="tns:MailSW" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="MailSW">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="From" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="To" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Content" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Date" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Status" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="OutBox">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AccountName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Pass" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="OutBoxResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="OutBoxResult" type="tns:ArrayOfMailSW" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddMail">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AccountName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Pass" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="x" type="tns:MailSW" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddMailResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="AddMailResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="RegisterSoapIn">
+    <wsdl:part name="parameters" element="tns:Register" />
+  </wsdl:message>
+  <wsdl:message name="RegisterSoapOut">
+    <wsdl:part name="parameters" element="tns:RegisterResponse" />
+  </wsdl:message>
+  <wsdl:message name="LoginSoapIn">
+    <wsdl:part name="parameters" element="tns:Login" />
+  </wsdl:message>
+  <wsdl:message name="LoginSoapOut">
+    <wsdl:part name="parameters" element="tns:LoginResponse" />
+  </wsdl:message>
+  <wsdl:message name="InBoxSoapIn">
+    <wsdl:part name="parameters" element="tns:InBox" />
+  </wsdl:message>
+  <wsdl:message name="InBoxSoapOut">
+    <wsdl:part name="parameters" element="tns:InBoxResponse" />
+  </wsdl:message>
+  <wsdl:message name="OutBoxSoapIn">
+    <wsdl:part name="parameters" element="tns:OutBox" />
+  </wsdl:message>
+  <wsdl:message name="OutBoxSoapOut">
+    <wsdl:part name="parameters" element="tns:OutBoxResponse" />
+  </wsdl:message>
+  <wsdl:message name="AddMailSoapIn">
+    <wsdl:part name="parameters" element="tns:AddMail" />
+  </wsdl:message>
+  <wsdl:message name="AddMailSoapOut">
+    <wsdl:part name="parameters" element="tns:AddMailResponse" />
+  </wsdl:message>
+  <wsdl:portType name="MobileMailWSSoap">
+    <wsdl:operation name="Register">
+      <wsdl:input message="tns:RegisterSoapIn" />
+      <wsdl:output message="tns:RegisterSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Login">
+      <wsdl:input message="tns:LoginSoapIn" />
+      <wsdl:output message="tns:LoginSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="InBox">
+      <wsdl:input message="tns:InBoxSoapIn" />
+      <wsdl:output message="tns:InBoxSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="OutBox">
+      <wsdl:input message="tns:OutBoxSoapIn" />
+      <wsdl:output message="tns:OutBoxSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddMail">
+      <wsdl:input message="tns:AddMailSoapIn" />
+      <wsdl:output message="tns:AddMailSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="MobileMailWSSoap" type="tns:MobileMailWSSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Register">
+      <soap:operation soapAction="http://tempuri.org/Register" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Login">
+      <soap:operation soapAction="http://tempuri.org/Login" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InBox">
+      <soap:operation soapAction="http://tempuri.org/InBox" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="OutBox">
+      <soap:operation soapAction="http://tempuri.org/OutBox" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddMail">
+      <soap:operation soapAction="http://tempuri.org/AddMail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="MobileMailWSSoap12" type="tns:MobileMailWSSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Register">
+      <soap12:operation soapAction="http://tempuri.org/Register" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Login">
+      <soap12:operation soapAction="http://tempuri.org/Login" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InBox">
+      <soap12:operation soapAction="http://tempuri.org/InBox" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="OutBox">
+      <soap12:operation soapAction="http://tempuri.org/OutBox" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddMail">
+      <soap12:operation soapAction="http://tempuri.org/AddMail" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="MobileMailWS">
+    <wsdl:port name="MobileMailWSSoap" binding="tns:MobileMailWSSoap">
+      <soap:address location="http://mobilemail.somee.com/MobileMail/MobileMailWS.asmx" />
+    </wsdl:port>
+    <wsdl:port name="MobileMailWSSoap12" binding="tns:MobileMailWSSoap12">
+      <soap12:address location="http://mobilemail.somee.com/MobileMail/MobileMailWS.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
